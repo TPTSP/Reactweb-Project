@@ -3,6 +3,7 @@ import axios from "axios";
 
 const Newsdetails = () => {
 	const [news, setNews] = useState([]);
+	const [isLoading, setIsloading] = useState(true);
 	const getNewsData = async () => {
 		try {
 			axios
@@ -14,6 +15,7 @@ const Newsdetails = () => {
 					console.log(response.data);
 
 					setNews(response.data.articles);
+					setIsloading(false);
 				});
 		} catch (error) {
 			console.log(error);
@@ -25,6 +27,30 @@ const Newsdetails = () => {
 
 	return (
 		<>
+			{/* <div className="flex justify-center items-center text-center">
+				<div className="w-full">
+					<div
+						className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+						role="status"
+					></div>
+					<span className="pl-2"> Loading...</span>
+				</div>
+			</div> */}
+
+			{isLoading && (
+				<div className="grid grid-cols-1  mx-auto gap-4">
+					<div className="flex justify-center items-center text-center">
+						<div className="w-full text-center">
+							<div
+								className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+								role="status"
+							></div>
+							<span className="pl-2"> Loading...</span>
+						</div>
+					</div>
+				</div>
+			)}
+
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 				{news.map(({ description, title, url, urlToImage }, index) => {
 					return (
@@ -47,8 +73,8 @@ const Newsdetails = () => {
 								</div>
 								<div className="p-4">
 									{/* <span className="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-										{nitem.title}
-									</span> */}
+							{nitem.title}
+						</span> */}
 									<h2 className="mt-2 mb-2  font-bold">{title}</h2>
 									<p className="text-sm">{description}</p>
 									<div className="mt-3 flex items-center">

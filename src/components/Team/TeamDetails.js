@@ -28,6 +28,7 @@ const TeamDetails = () => {
 				)
 				.then((res) => {
 					setUserList(res.data);
+					// console.log(res);
 					// console.log(res.data);
 					setIsloading(false);
 				});
